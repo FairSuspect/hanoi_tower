@@ -7,6 +7,9 @@ class PlayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Hanoi Tower"),
+      ),
       body: SafeArea(
         child: Center(
             child: Row(

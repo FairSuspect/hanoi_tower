@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 class Tower extends StatelessWidget {
   const Tower({Key key}) : super(key: key);
 
+  static const double stickHeight = 150;
+  static const double stickWidth = 20;
+  static const double baseHeight = 20;
+  static const double baseWidth = 100;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 220,
+      height: stickHeight + baseHeight,
       child: Column(
         children: [
           _stick(Theme.of(context).accentColor),
@@ -17,14 +22,14 @@ class Tower extends StatelessWidget {
   }
 
   Widget _base(Color color) => Container(
-        width: 100,
-        height: 20,
+        width: baseWidth,
+        height: baseHeight,
         color: color,
       );
 
   Widget _stick(Color color) => Container(
-        width: 20,
-        height: 200,
+        width: stickWidth,
+        height: stickHeight,
         color: color,
       );
 }
