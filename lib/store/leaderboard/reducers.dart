@@ -8,7 +8,7 @@ import 'actions.dart' as Actions;
 // ]);
 final leaderboardReducer = _setLeaderboard;
 
-Leaderboard _setLeaderboard(state, action) {
+Leaderboard? _setLeaderboard(state, action) {
   Leaderboard.saveToLocalStorage(action.leaderboard);
   return action.leaderboard;
 }

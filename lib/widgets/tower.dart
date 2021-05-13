@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Tower extends StatelessWidget {
-  const Tower({Key key}) : super(key: key);
+  const Tower({Key? key}) : super(key: key);
 
   static const double stickHeight = 150;
   static const double stickWidth = 20;

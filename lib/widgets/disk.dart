@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Disk extends StatelessWidget {
   final Color color;
   final double radius;
-  const Disk({Key key, @required this.color, @required this.radius})
+  const Disk({Key? key, required this.color, required this.radius})
       : assert(radius > 0, "Radius must be positive (more than zero)"),
         assert(color != null, "Color must be non-null value"),
         super(key: key);

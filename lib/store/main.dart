@@ -6,9 +6,9 @@ import 'package:redux_thunk/redux_thunk.dart';
 import 'leaderboard/reducers.dart';
 
 class AppState {
-  final Leaderboard leaderboard;
+  final Leaderboard? leaderboard;
 
-  AppState({@required this.leaderboard});
+  AppState({required this.leaderboard});
   AppState.initialState() : leaderboard = Leaderboard.fromLocalStorage();
 }
 

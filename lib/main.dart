@@ -22,8 +22,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        // routes: routes.map((e) => {e.routeName : e.widget}).to,
         onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
-        initialRoute: Routes.main,
+        // initialRoute: Routes.main,
         // home: HomeScreen(title: 'Hanoi Tower Game'),
       ),
     );
@@ -31,16 +32,16 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key, this.title}) : super(key: key);
+  HomeScreen({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int get highScore => store?.state?.highScore ?? 0;
+  int get highScore => store.state?.highScore ?? 0;
 
   String get localStorageKey => 'leaderboard';
 
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: Center(
         child: Column(

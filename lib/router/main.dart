@@ -1,17 +1,19 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:hanoi_tower/main.dart';
 import 'package:hanoi_tower/screens/play_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    print("generateRoute with settings:$settings");
     final args = settings.arguments;
 
-    var route = routes.firstWhere((x) => x.routeName == settings.name,
-        orElse: () => null);
+    var route = routes.firstWhereOrNull((x) => x.routeName == settings.name);
 
     if (route != null) {
       return MaterialPageRoute(builder: (context) => route.widget(args));
     }
+    return MaterialPageRoute(builder: (context) => routes[0].widget(args));
   }
 }
 
