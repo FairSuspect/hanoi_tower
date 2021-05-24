@@ -34,5 +34,9 @@ class Routes {
 
 final routes = [
   RouteBuilder(Routes.main, (args) => HomeScreen(title: 'Hanoi Tower Game')),
-  RouteBuilder(Routes.play, (args) => PlayScreen())
+  RouteBuilder(
+      Routes.play,
+      (args) => PlayScreen(
+            playByHuman: args?[0] ?? true,
+          ))
 ];

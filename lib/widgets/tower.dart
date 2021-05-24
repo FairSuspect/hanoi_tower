@@ -30,7 +30,6 @@ class _TowerState extends State<Tower> {
   @override
   void setState(void Function() fn) {
     super.setState(fn);
-    widget.onTap();
   }
 
   // List<DiskEntity> get _disks =>

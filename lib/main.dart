@@ -47,6 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).pushNamed(Routes.play);
   }
 
+  void _computerGamePressed() {
+    Navigator.of(context).pushNamed(Routes.play, arguments: [false]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-                child: Text("Новая игра"), onPressed: _newGamePressed)
+            ElevatedButton.icon(
+                onPressed: _newGamePressed,
+                icon: Icon(Icons.play_arrow),
+                label: Text("Новая игра")),
+            ElevatedButton.icon(
+                onPressed: _computerGamePressed,
+                icon: Icon(Icons.computer),
+                label: Text("Игра компьютера"))
           ],
         ),
       ),

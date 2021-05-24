@@ -1,16 +1,19 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hanoi_tower/router/main.dart';
 import 'package:hanoi_tower/widgets/disk.dart';
 import 'package:hanoi_tower/widgets/tower.dart';
 
 class PlayScreen extends StatefulWidget {
-  const PlayScreen({Key? key}) : super(key: key);
+  final bool playByHuman;
+  const PlayScreen({Key? key, this.playByHuman = true}) : super(key: key);
 
   @override
   _PlayScreenState createState() => _PlayScreenState();
 }
 
-List<DiskEntity> entities = [];
 List<Widget> disks = List.empty(growable: true);
 bool moving = false;
 DiskEntity selectedDisk = DiskEntity(
@@ -29,6 +32,7 @@ class _PlayScreenState extends State<PlayScreen> {
     Colors.deepOrange,
     Colors.brown
   ];
+  bool isPlaying = true;
   // List<Key>? disksKeys = [
   //   UniqueKey(),
   //   UniqueKey(),
@@ -38,9 +42,10 @@ class _PlayScreenState extends State<PlayScreen> {
   // ];
   void towerTapHandler(int id) {
     if (elevetedDisk == null) {
-      setState(() {
-        elevetedDisk = hanoiTowers[id].disks.removeLast();
-      });
+      if (hanoiTowers[id].disks.length != 0)
+        setState(() {
+          elevetedDisk = hanoiTowers[id].disks.removeLast();
+        });
     } else {
       if (hanoiTowers[id].disks.length == 0 ||
           hanoiTowers[id].disks.last.radius > elevetedDisk!.radius) {
@@ -50,6 +55,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
           elevetedDisk = null;
           if (hanoiTowers[2].disks.length == diskColorList.length) {
+            isPlaying = false;
             _winDialog();
           }
         });
@@ -92,24 +98,33 @@ class _PlayScreenState extends State<PlayScreen> {
     for (int i = diskColorList.length - 1; i >= 0; --i)
       hanoiDisks.add(HanoiDisk(
           color: diskColorList[i], radius: (i + 2) * 20, lastTowerId: 0));
-
+    isPlaying = true;
     hanoiTowers = [
       HanoiTower(
           disks: hanoiDisks,
-          onTap: () {
-            towerTapHandler(0);
-          }),
+          onTap: widget.playByHuman
+              ? () {
+                  towerTapHandler(0);
+                }
+              : () {}),
       HanoiTower(
           disks: List.empty(growable: true),
-          onTap: () {
-            towerTapHandler(1);
-          }),
+          onTap: widget.playByHuman
+              ? () {
+                  towerTapHandler(1);
+                }
+              : () {}),
       HanoiTower(
           disks: List.empty(growable: true),
-          onTap: () {
-            towerTapHandler(2);
-          }),
+          onTap: widget.playByHuman
+              ? () {
+                  towerTapHandler(2);
+                }
+              : () {}),
     ];
+    if (!widget.playByHuman) {
+      computerPlay();
+    }
     // towers = [
     //   Tower(
     //       key: UniqueKey(),
@@ -140,19 +155,62 @@ class _PlayScreenState extends State<PlayScreen> {
     // });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    entities = [];
-    hanoiTowers = [];
-    hanoiDisks = [];
-    elevetedDisk = null;
+  bool _canPlaceDisk(int towerId, HanoiDisk disk) {
+    if (hanoiTowers[towerId].disks.length == 0) return true;
+    if (hanoiTowers[towerId].disks.last.radius > disk.radius) return true;
+    return false;
+  }
+
+  bool _shouldElevate(int towerId) {
+    for (int i = 0; i < hanoiTowers.length; ++i) {
+      if (i != towerId) {
+        if (_canPlaceDisk(i, _lastDisk(towerId))) return true;
+      }
+    }
+
+    return false;
+  }
+
+  HanoiDisk _lastDisk(int towerId) {
+    if (hanoiTowers[towerId].disks.length == 0)
+      return HanoiDisk(color: Colors.black, radius: -1, lastTowerId: -1);
+    return hanoiTowers[towerId].disks.last;
+  }
+
+// double _lastDiskRadius(int towerId)
+// {
+//   if()
+//   hanoiTowers[randomNumber].disks.last.radius
+// }
+  int lastNumber = -1;
+  int randomNumber = 0;
+
+  void computerPlay() async {
+    while (isPlaying) {
+      await Future.delayed(Duration(milliseconds: 100));
+      randomNumber = Random().nextInt(3);
+      if (randomNumber != lastNumber) {
+        if (elevetedDisk != null) {
+          if (_canPlaceDisk(randomNumber, elevetedDisk!)) {
+            towerTapHandler(randomNumber);
+            lastNumber = randomNumber;
+          }
+        } else {
+          if (_shouldElevate(randomNumber)) {
+            towerTapHandler(randomNumber);
+            lastNumber = randomNumber;
+          }
+        }
+      }
+    }
   }
 
   @override
-  void setState(fn) {
-    super.setState(fn);
-    print("Play screen updated");
+  void dispose() {
+    super.dispose();
+    hanoiTowers = [];
+    hanoiDisks = [];
+    elevetedDisk = null;
   }
 
   @override
