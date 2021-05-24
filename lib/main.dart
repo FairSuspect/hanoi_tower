@@ -51,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).pushNamed(Routes.play, arguments: [false]);
   }
 
+  void _exit() {
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,8 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            Text("Hanoi Tower", style: Theme.of(context).textTheme.headline1),
             ElevatedButton.icon(
                 onPressed: _newGamePressed,
                 icon: Icon(Icons.play_arrow),
@@ -68,7 +73,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ElevatedButton.icon(
                 onPressed: _computerGamePressed,
                 icon: Icon(Icons.computer),
-                label: Text("Игра компьютера"))
+                label: Text("Игра компьютера")),
+            ElevatedButton.icon(
+                onPressed: _exit,
+                icon: Icon(Icons.exit_to_app),
+                label: Text("Выход")),
+            Container(),
+            Container(),
+            Container(),
+            Container(),
           ],
         ),
       ),

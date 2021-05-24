@@ -84,7 +84,8 @@ class _PlayScreenState extends State<PlayScreen> {
                     onPressed: () {
                       Navigator.of(context).pop();
 
-                      Navigator.of(context).pushReplacementNamed(Routes.play);
+                      Navigator.of(context).pushReplacementNamed(Routes.play,
+                          arguments: [widget.playByHuman]);
                     },
                     child: Text("Заново")),
               ],
