@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hanoi_tower/models/leaderboard.dart';
 import 'package:redux/redux.dart';
-import 'package:redux_thunk/redux_thunk.dart';
 
 import 'leaderboard/reducers.dart';
 

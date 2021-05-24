@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:hanoi_tower/models/leaderboard.dart';
 import 'package:hanoi_tower/router/main.dart';
-import 'package:hanoi_tower/store/leaderboard/actions.dart';
 import 'package:hanoi_tower/store/main.dart';
 import 'services/localstorage.dart';
 
