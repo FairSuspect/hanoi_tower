@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:hanoi_tower/main.dart';
+import 'package:hanoi_tower/screens/info_screen.dart';
 import 'package:hanoi_tower/screens/play_screen.dart';
 
 class RouteGenerator {
@@ -30,6 +31,7 @@ class RouteBuilder {
 class Routes {
   static const play = '/play';
   static const main = '/main';
+  static const info = '/info';
 }
 
 final routes = [
@@ -38,5 +40,6 @@ final routes = [
       Routes.play,
       (args) => PlayScreen(
             playByHuman: args?[0] ?? true,
-          ))
+          )),
+  RouteBuilder('/info', (args) => InfoScreen())
 ];

@@ -19,12 +19,10 @@ bool moving = false;
 DiskEntity selectedDisk = DiskEntity(
     widget: Container(), tower: Key('1'), lastTower: Key('1'), radius: 0);
 
-List<Tower> towers = [];
-List<HanoiTower> hanoiTowers = [];
-List<HanoiDisk> hanoiDisks = [];
-HanoiDisk? elevetedDisk;
-
 class _PlayScreenState extends State<PlayScreen> {
+  List<HanoiTower> hanoiTowers = [];
+  List<HanoiDisk> hanoiDisks = [];
+  HanoiDisk? elevetedDisk;
   List<Color> diskColorList = [
     Colors.red,
     Colors.lightGreen,
@@ -33,13 +31,7 @@ class _PlayScreenState extends State<PlayScreen> {
     Colors.brown
   ];
   bool isPlaying = true;
-  // List<Key>? disksKeys = [
-  //   UniqueKey(),
-  //   UniqueKey(),
-  //   UniqueKey(),
-  //   UniqueKey(),
-  //   UniqueKey(),
-  // ];
+
   void towerTapHandler(int id) {
     if (elevetedDisk == null) {
       if (hanoiTowers[id].disks.length != 0)

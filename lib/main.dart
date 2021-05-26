@@ -16,10 +16,14 @@ class MyApp extends StatelessWidget {
     return StoreProvider(
       store: store,
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Ханойские башни',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            accentColor: Colors.white70,
+            primaryColorDark: Colors.grey,
+            colorScheme: ColorScheme.dark(primary: Colors.grey),
+            primarySwatch: Colors.grey,
+            scaffoldBackgroundColor: Colors.black87,
+            backgroundColor: Colors.black),
         // routes: routes.map((e) => {e.routeName : e.widget}).to,
         onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
         // initialRoute: Routes.main,
@@ -55,6 +59,37 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.pop(context);
   }
 
+  void _about() {
+    Navigator.of(context).pushNamed(Routes.info);
+  }
+
+  void _infoDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Об авторе"),
+              content: Container(
+                height: 100,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Великанов Кирилл Юрьевич"),
+                    Text("ИВБО-05-18"),
+                    Text("2021"),
+                    Text("velik.kir@gmail.com")
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Понятно"))
+              ],
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text("Hanoi Tower", style: Theme.of(context).textTheme.headline1),
+            Text("Ханойская башня",
+                style: Theme.of(context).textTheme.headline3),
             ElevatedButton.icon(
                 onPressed: _newGamePressed,
                 icon: Icon(Icons.play_arrow),
@@ -78,7 +114,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: _exit,
                 icon: Icon(Icons.exit_to_app),
                 label: Text("Выход")),
-            Container(),
+            ElevatedButton.icon(
+                onPressed: _about,
+                icon: Icon(Icons.info_outline),
+                label: Text("О программе")),
+            ElevatedButton.icon(
+                onPressed: _infoDialog,
+                icon: Icon(Icons.info),
+                label: Text("Об авторе")),
             Container(),
             Container(),
             Container(),
