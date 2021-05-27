@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text("Ханойская башня",
-                style: Theme.of(context).textTheme.headline3),
+                style: Theme.of(context).textTheme.headline4),
             ElevatedButton.icon(
                 onPressed: _newGamePressed,
                 icon: Icon(Icons.play_arrow),
@@ -111,10 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icon(Icons.computer),
                 label: Text("Игра компьютера")),
             ElevatedButton.icon(
-                onPressed: _exit,
-                icon: Icon(Icons.exit_to_app),
-                label: Text("Выход")),
-            ElevatedButton.icon(
                 onPressed: _about,
                 icon: Icon(Icons.info_outline),
                 label: Text("О программе")),
@@ -122,6 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: _infoDialog,
                 icon: Icon(Icons.info),
                 label: Text("Об авторе")),
+            ElevatedButton.icon(
+                onPressed: _exit,
+                icon: Icon(Icons.exit_to_app),
+                label: Text("Выход")),
             Container(),
             Container(),
             Container(),

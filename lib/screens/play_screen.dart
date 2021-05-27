@@ -180,7 +180,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
   void computerPlay() async {
     while (isPlaying) {
-      await Future.delayed(Duration(milliseconds: 100));
+      await Future.delayed(Duration(milliseconds: 1));
       randomNumber = Random().nextInt(3);
       if (randomNumber != lastNumber) {
         if (elevetedDisk != null) {

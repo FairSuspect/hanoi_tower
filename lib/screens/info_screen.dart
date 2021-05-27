@@ -10,22 +10,24 @@ class InfoScreen extends StatelessWidget {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Ханойские башни",
-                style: Theme.of(context).textTheme.headline2),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Text(
-                "Ханойская башня является одной из популярных головоломок XIX века. Даны три стержня, на один из которых нанизаны восемь колец, причём кольца отличаются размером и лежат меньшее на большем. Задача состоит в том, чтобы перенести пирамиду из восьми колец за наименьшее число ходов на другой стержень. За один раз разрешается переносить только одно кольцо, причём нельзя класть большее кольцо на меньшее.",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .merge(TextStyle(fontSize: 22)),
-              ),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Ханойская башня",
+                  style: Theme.of(context).textTheme.headline4),
+              Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  "Ханойская башня является одной из популярных головоломок XIX века. Даны три стержня, на один из которых нанизаны восемь колец, причём кольца отличаются размером и лежат меньшее на большем. Задача состоит в том, чтобы перенести пирамиду из восьми колец за наименьшее число ходов на другой стержень. За один раз разрешается переносить только одно кольцо, причём нельзя класть большее кольцо на меньшее.",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .merge(TextStyle(fontSize: 20)),
+                ),
+              )
+            ],
+          ),
         ),
       )),
     );
